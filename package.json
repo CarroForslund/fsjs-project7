@@ -18,5 +18,7 @@
     "url": "https://github.com/CarroForslund/fsjs-project6/issues"
   },
   "homepage": "https://github.com/CarroForslund/fsjs-project7#readme",
-  "dependencies": {}
+  "dependencies": {
+    "express": "^4.16.2"
+  }
 }
