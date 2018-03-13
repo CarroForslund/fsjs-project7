@@ -1,7 +1,7 @@
 {
   "name": "fsjs-project7",
   "version": "1.0.0",
-  "description": "",
+  "description": "Twitter Interface",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -20,6 +20,7 @@
   "homepage": "https://github.com/CarroForslund/fsjs-project7#readme",
   "dependencies": {
     "express": "^4.16.2",
+    "nodemon": "^1.17.1",
     "pug": "^2.0.0-rc.4"
   }
 }
