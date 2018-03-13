@@ -8,7 +8,7 @@ const T = new Twit(config);
 
 //APP (EXPRESS) SETTINGS
 app.set('view engine', 'pug'); //Set up the engine template to use Pug
-
+app.use(express.static('public'));
 //Declare a route. The get methos takes 2 parameters. The route and a cb function
 //The send methos sends a string to the client
 app.get('/', (req, res) => {
