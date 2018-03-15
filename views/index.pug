@@ -20,7 +20,10 @@ html(lang='en')
 			CSS
 			––––––––––––––––––––––––––––––––––––––––––––––––––
 		link(rel='stylesheet', href='css/global.css')
+		
+		
 	body
+	
 		header.circle--header(style='background-image: url('+user.background+')')
 			.bounds
 				.circle--fluid
@@ -38,6 +41,10 @@ html(lang='en')
 							ul.circle--inline
 								li
 									a Sign Out
+									
+		//
+			Publish Tweet
+			––––––––––––––––––––––––––––––––––––––––––––––––––							
 		.app--tweet
 			form
 				.circle--fluid
@@ -48,7 +55,11 @@ html(lang='en')
 						strong#tweet-char.app--tweet--char 140
 					.circle--fluid--cell.align-bottom
 						button.button-primary Tweet
+									
 		.bounds.app--body
+			// ===================
+			// Header
+			// ===================
 			.app--section--header
 				.grid-33
 					.app--section--heading
@@ -60,6 +71,10 @@ html(lang='en')
 				.grid-33
 					.app--section--heading
 						h2 Direct Messages
+			
+			// ===================
+			// Timeline
+			// ===================			
 			.grid-33
 				.app--section
 					ul.app--tweet--list
@@ -97,6 +112,9 @@ html(lang='en')
 											path.st0(d='M25.8,0c-3.6,0-6.8,2.1-8.3,5.1C16,2.1,12.9,0,9.2,0C4.1,0,0,4.1,0,9.2C0,21.4,17.3,28,17.3,28S35,21.3,35,9.2\
 											C35,4.1,30.9,0,25.8,0L25.8,0z')
 										strong 12
+			// ===================
+			// Friends (following)
+			// ===================								
 			.grid-33
 				.app--section
 					ul.app--user--list
@@ -150,6 +168,10 @@ html(lang='en')
 										p @jillspore
 								.circle--fluid--cell
 									a.button.button-text Unfollow
+									
+			// ===================
+			// Private message conversation
+			// ===================	
 			.grid-33
 				.app--section
 					ul.app--message--list

@@ -12,13 +12,11 @@ app.use(express.static('public'));
 //Declare a route. The get methos takes 2 parameters. The route and a cb function
 //The send methos sends a string to the client
 app.get('/', (req, res) => {
-  // ========================
-  // MOVE THIS TO APP.GET "/"
-  // ========================
   // Twit has promise support; you can use the callback API,
   // promise API, or both at the same time.
   T.get('account/verify_credentials', { skip_status: true })
     .catch(function (err) {
+      //TODO: Redirect to 404 page
       console.log('caught error', err.stack)
     })
     .then(function (result) {
@@ -32,12 +30,14 @@ app.get('/', (req, res) => {
       user.name = data.screen_name; //Get profile name
       user.image = data.profile_image_url; //Get profile image
       user.background = data.profile_banner_url; //Get background image
+      // user.friends = data.friends_count; // Get (all) friends (people I follow). TODO: Only display 5
+
       console.log(user);
       // Get the 5 most recent tweets
-      // Get the 5 most recent friends (people I follow)
-      T.get('friends/ids', { screen_name: user.name, count: 5 },  function (err, data, response) {
+      // Get my 5 latest friends (people I follow)
+      T.get('friends/list', { screen_name: user.name, count: 5 },  function (err, data, response) {
         user.friends = data;
-        console.log(user);
+        console.log(user.friends.users[0]);
         res.locals.user = user;
         res.render('index');
         // console.log(data)
