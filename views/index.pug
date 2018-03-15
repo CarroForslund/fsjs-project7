@@ -21,7 +21,7 @@ html(lang='en')
 			––––––––––––––––––––––––––––––––––––––––––––––––––
 		link(rel='stylesheet', href='css/global.css')
 	body
-		header.circle--header
+		header.circle--header(style='background-image: url('+user.background+')')
 			.bounds
 				.circle--fluid
 					.circle--fluid--cell
@@ -42,7 +42,7 @@ html(lang='en')
 			form
 				.circle--fluid
 					.circle--fluid--cell.circle--fluid--primary.align-bottom.app--tweet--post
-						.app--avatar(style='background-image: url(images/m-spore.png)')
+						.app--avatar(style='background-image: url('+user.image+')')
 							img(src='images/m-spore.png')
 						textarea#tweet-textarea.circle--textarea--input(placeholder="What's happening?")
 						strong#tweet-char.app--tweet--char 140

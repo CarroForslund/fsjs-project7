@@ -31,7 +31,8 @@ app.get('/', (req, res) => {
       const user = {};
       user.name = data.screen_name; //Get profile name
       user.image = data.profile_image_url; //Get profile image
-      user.background = data.profile_background_image_url; //Get background image
+      user.background = data.profile_banner_url; //Get background image
+      console.log(user);
       // Get the 5 most recent tweets
       // Get the 5 most recent friends (people I follow)
       T.get('friends/ids', { screen_name: user.name, count: 5 },  function (err, data, response) {
