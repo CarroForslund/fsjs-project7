@@ -129,47 +129,10 @@ html(lang='en')
 											h4= friend.name
 											p @#{friend.screen_name}
 									.circle--fluid--cell
-										a.button.button-text Unfollow
-						//- li
-						//- 	.circle--fluid
-						//- 		.circle--fluid--cell.circle--fluid--primary
-						//- 			a.app--tweet--author
-						//- 				.app--avatar(style='background-image: url(images/f-spore.png)')
-						//- 					img(src='images/f-spore.png')
-						//- 				h4 Jill Spore
-						//- 				p @jillspore
-						//- 		.circle--fluid--cell
-						//- 			a.button.button-text Unfollow
-						//- li
-						//- 	.circle--fluid
-						//- 		.circle--fluid--cell.circle--fluid--primary
-						//- 			a.app--tweet--author
-						//- 				.app--avatar(style='background-image: url(images/f-spore.png)')
-						//- 					img(src='images/f-spore.png')
-						//- 				h4 Jill Spore
-						//- 				p @jillspore
-						//- 		.circle--fluid--cell
-						//- 			a.button.button-text Unfollow
-						//- li
-						//- 	.circle--fluid
-						//- 		.circle--fluid--cell.circle--fluid--primary
-						//- 			a.app--tweet--author
-						//- 				.app--avatar(style='background-image: url(images/f-spore.png)')
-						//- 					img(src='images/f-spore.png')
-						//- 				h4 Jill Spore
-						//- 				p @jillspore
-						//- 		.circle--fluid--cell
-						//- 			a.button Follow
-						//- li
-						//- 	.circle--fluid
-						//- 		.circle--fluid--cell.circle--fluid--primary
-						//- 			a.app--tweet--author
-						//- 				.app--avatar(style='background-image: url(images/f-spore.png)')
-						//- 					img(src='images/f-spore.png')
-						//- 				h4 Jill Spore
-						//- 				p @jillspore
-						//- 		.circle--fluid--cell
-						//- 			a.button.button-text Unfollow
+										if friend.following
+											a.button.button-text Unfollow
+										else
+											a.button Follow
 									
 			// ===================
 			// Private message conversation

@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
         user.tweets = data;
         // res.locals.user = user;
         // res.render('index');
-        console.log('tweets', user.tweets)
+        // console.log('friends', user.tweets)
       });
 
       // Get my 5 latest friends (people I follow)
@@ -47,7 +47,7 @@ app.get('/', (req, res) => {
         // console.log(user.friends.users[0]);
         res.locals.user = user;
         res.render('index');
-        // console.log(data)
+        console.log(data)
       });
 
       // Get the 5 most recent private messages
