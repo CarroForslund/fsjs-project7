@@ -30,18 +30,26 @@ app.get('/', (req, res) => {
       user.name = data.screen_name; //Get profile name
       user.image = data.profile_image_url; //Get profile image
       user.background = data.profile_banner_url; //Get background image
-      // user.friends = data.friends_count; // Get (all) friends (people I follow). TODO: Only display 5
 
-      console.log(user);
+      // console.log(data);
       // Get the 5 most recent tweets
+      // statuses/user_timeline
+      T.get('statuses/user_timeline', { screen_name: user.name, count: 5 },  function (err, data, response) {
+        user.tweets = data;
+        // res.locals.user = user;
+        // res.render('index');
+        console.log('tweets', user.tweets)
+      });
+
       // Get my 5 latest friends (people I follow)
       T.get('friends/list', { screen_name: user.name, count: 5 },  function (err, data, response) {
         user.friends = data;
-        console.log(user.friends.users[0]);
+        // console.log(user.friends.users[0]);
         res.locals.user = user;
         res.render('index');
         // console.log(data)
       });
+
       // Get the 5 most recent private messages
 
 
