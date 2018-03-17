@@ -12,9 +12,16 @@ app.set('view engine', 'pug'); //Set up the engine template to use Pug
 app.use(express.static('public'));
 
 app.use((req, res, next) => {
+
   // Get the 5 most recent tweets
   T.get('statuses/user_timeline', { screen_name: user.name, count: 5 },  function (err, data, res) {
-    user.tweets = data;
+
+    if(err){
+      console.log('Error: ', err);
+    }
+    else {
+      user.tweets = data;
+    }
   });
   next();
 });
@@ -38,10 +45,19 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
   // Get the 5 latest private messages in my last private conversation
   T.get('direct_messages/events/list', { screen_name: user.name, count: 5 },  function (err, data, response) {
-    user.messages = data.events;
-    // console.log(user.messages.message_create.message_data);
+
+    if(err){
+      console.log('Error: ', err);
+    }
+    else {
+      user.messages = data.events;
+      // console.log(user.messages.message_create.message_data);
+    }
+
   });
+
   next();
+  
 });
 
 //Declare a route. The get methos takes 2 parameters. The route and a cb function
