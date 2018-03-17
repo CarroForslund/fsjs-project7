@@ -57,7 +57,7 @@ app.use((req, res, next) => {
   });
 
   next();
-  
+
 });
 
 //Declare a route. The get methos takes 2 parameters. The route and a cb function
@@ -67,8 +67,15 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
+app.use((req, res, next) => {
+  const err = new Error('The Page Does Not Exist');
+  err.status = 404;
+  next(err);
+});
+
 app.use((err, req, res, next) => {
   res.locals.error = err;
+  res.status(err.status);
   res.render('error');
 });
 
