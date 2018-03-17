@@ -20,24 +20,21 @@ block content
 							li
 								a Sign Out
 								
-	//
-		Publish Tweet
-		––––––––––––––––––––––––––––––––––––––––––––––––––							
+	// Publish Tweet
 	.app--tweet
-		form
+		form(action='/', method='post')
 			.circle--fluid
 				.circle--fluid--cell.circle--fluid--primary.align-bottom.app--tweet--post
 					.app--avatar(style='background-image: url('+user.image+')')
 						img(src='images/m-spore.png')
-					textarea#tweet-textarea.circle--textarea--input(placeholder="What's happening?")
+					textarea#tweet-textarea.circle--textarea--input(type='text', name='tweet' placeholder="What's happening?")
 					strong#tweet-char.app--tweet--char 140
 				.circle--fluid--cell.align-bottom
-					button.button-primary Tweet
+					button.button-primary(type='submit') Tweet
 								
 	.bounds.app--body
-		// ===================
+	
 		// Header
-		// ===================
 		.app--section--header
 			.grid-33
 				.app--section--heading
@@ -50,9 +47,8 @@ block content
 				.app--section--heading
 					h2 Direct Messages
 		
-		// ===================
 		// Timeline
-		// ===================			
+		
 		.grid-33
 			.app--section
 				ul.app--tweet--list
@@ -91,9 +87,9 @@ block content
 											path.st0(d='M25.8,0c-3.6,0-6.8,2.1-8.3,5.1C16,2.1,12.9,0,9.2,0C4.1,0,0,4.1,0,9.2C0,21.4,17.3,28,17.3,28S35,21.3,35,9.2\
 											C35,4.1,30.9,0,25.8,0L25.8,0z')
 										strong #{tweet.favorite_count}
-		// ===================
+
 		// Friends (following)
-		// ===================								
+						
 		.grid-33
 			.app--section
 				ul.app--user--list
@@ -112,9 +108,8 @@ block content
 									else
 										a.button Follow
 								
-		// ===================
 		// Private message conversation
-		// ===================	
+
 		.grid-33
 			.app--section
 				ul.app--message--list

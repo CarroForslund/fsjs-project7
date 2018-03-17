@@ -1,5 +1,6 @@
 //VARIABLE DECLARATION
 const express = require('express'); //Require express to be able to use it
+const bodyParser = require('body-parser');
 const app = express();  // Express app declaration
 
 const Twit = require('twit'); //Require Twit to be able to use it
@@ -10,6 +11,7 @@ const user = {};
 //APP (EXPRESS) SETTINGS
 app.set('view engine', 'pug'); //Set up the engine template to use Pug
 app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
 
@@ -65,6 +67,20 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
   res.locals.user = user;
   res.render('index');
+});
+
+app.post('/', (req, res) => {
+  T.post('statuses/update', { status: 'hello world!' }, function(err, data, response) {
+    if(err){
+      console.log('Error: ', err);
+    }
+    else {
+      console.log(data);
+      res.locals.user = user;
+      res.render('index');
+    }
+  })
+
 });
 
 app.use((req, res, next) => {
