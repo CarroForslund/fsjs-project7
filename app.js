@@ -19,7 +19,8 @@ app.use((req, res, next) => {
   T.get('statuses/user_timeline', { screen_name: user.name, count: 5 },  function (err, data, res) {
 
     if(err){
-      console.log('Error: ', err);
+      const err = new Error("Oops! We couldn't get your most recent tweets.");
+      err.status = 500;
     }
     else {
       user.tweets = data;
@@ -33,11 +34,12 @@ app.use((req, res, next) => {
   T.get('friends/list', { screen_name: user.name, count: 5 },  function (err, data, res) {
 
     if(err){
-      console.log('Error: ', err);
+      const err = new Error("Oops! We couldn't get your friends list.");
+      err.status = 500;
     }
     else {
       user.friends = data;
-      console.log(user.friends);
+      // console.log(user.friends);
     }
 
   });
@@ -46,10 +48,11 @@ app.use((req, res, next) => {
 
 app.use((req, res, next) => {
   // Get the 5 latest private messages in my last private conversation
-  T.get('direct_messages/events/list', { screen_name: user.name, count: 5 },  function (err, data, response) {
+  T.get('direct_messages/events/list', { count: 5 },  function (err, data, response) {
 
     if(err){
-      console.log('Error: ', err);
+      const err = new Error("Oops! We couldn't get get your direct messages.");
+      err.status = 500;
     }
     else {
       user.messages = data.events;
@@ -70,12 +73,14 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', (req, res) => {
+  // console.log(req.body.tweet);
   T.post('statuses/update', { status: 'hello world!' }, function(err, data, response) {
     if(err){
-      console.log('Error: ', err);
+      const err = new Error("Oops! We couldn't post your tweet.");
+      err.status = 500;
     }
     else {
-      console.log(data);
+      // console.log(data);
       res.locals.user = user;
       res.render('index');
     }
@@ -92,7 +97,7 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   res.locals.error = err;
   res.status(err.status);
-  res.render('error');
+  res.render('error', err);
 });
 
 app.listen(3000, () => {
