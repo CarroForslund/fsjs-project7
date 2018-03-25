@@ -9,9 +9,10 @@ const T = new Twit(config);
 const user = {};
 
 //APP (EXPRESS) SETTINGS
+app.use(bodyParser.urlencoded({ extended: false })); // To be able to read forms body data
 app.set('view engine', 'pug'); //Set up the engine template to use Pug
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: false }));
+
 
 app.use((req, res, next) => {
   // Twit has promise support; you can use the callback API,
@@ -93,19 +94,19 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', (req, res) => {
-  // console.log(req.body.tweet);
-  T.post('statuses/update', { status: 'hello world!' }, function(err, data, response) {
+
+  const tweet = req.body.tweet;
+
+  T.post('statuses/update', { status: tweet }, function(err, data, response) {
     if(err){
       const err = new Error("Oops! We couldn't post your tweet.");
       err.status = 500;
     }
     else {
-      // console.log(data);
       res.locals.user = user;
       res.redirect('/');
     }
   })
-
 });
 
 app.use((req, res, next) => {
