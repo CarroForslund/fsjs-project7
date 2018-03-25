@@ -14,7 +14,26 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
+  // Twit has promise support; you can use the callback API,
+  // promise API, or both at the same time.
+  T.get('account/verify_credentials', { skip_status: true })
+    .catch(function (err) {
+      console.log('caught error', err.stack)
+    })
+    .then(function (result) {
+      // `result` is an Object with keys "data" and "resp".
+      // `data` and `resp` are the same objects as the ones passed to the callback.
+      // See https://github.com/ttezel/twit#tgetpath-params-callback for details.
+      const data = result.data;
+      user.id = data.id;
+      user.name = data.screen_name; //Get profile name
+      user.image = data.profile_image_url; //Get profile image
+      user.background = data.profile_banner_url; //Get background image
+    });
+    next();
+});
 
+app.use((req, res, next) => {
   // Get the 5 most recent tweets
   T.get('statuses/user_timeline', { screen_name: user.name, count: 5 },  function (err, data, res) {
 
@@ -41,7 +60,6 @@ app.use((req, res, next) => {
       user.friends = data;
       // console.log(user.friends);
     }
-
   });
   next();
 });
@@ -49,16 +67,16 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
   // Get the 5 latest private messages in my last private conversation
   T.get('direct_messages/events/list', { count: 5 },  function (err, data, response) {
-
     if(err){
       const err = new Error("Oops! We couldn't get get your direct messages.");
       err.status = 500;
     }
     else {
       user.messages = data.events;
-      // console.log(user.messages.message_create.message_data);
+      console.log('DATA====================================');
+      console.log('user.messages[0].message_create');
+      console.log(user.messages[0].message_create);
     }
-
   });
 
   next();
@@ -69,6 +87,8 @@ app.use((req, res, next) => {
 //The send methos sends a string to the client
 app.get('/', (req, res) => {
   res.locals.user = user;
+  console.log('USER===========================');
+  console.log(user);
   res.render('index');
 });
 
@@ -82,7 +102,7 @@ app.post('/', (req, res) => {
     else {
       // console.log(data);
       res.locals.user = user;
-      res.render('index');
+      res.redirect('/');
     }
   })
 
