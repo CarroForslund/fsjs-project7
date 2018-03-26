@@ -26,7 +26,7 @@ app.use((req, res, next) => {
       // `data` and `resp` are the same objects as the ones passed to the callback.
       // See https://github.com/ttezel/twit#tgetpath-params-callback for details.
       const data = result.data;
-      user.id = data.id;
+      user.id = data.id.toString();
       user.name = data.screen_name; //Get profile name
       user.image = data.profile_image_url; //Get profile image
       user.background = data.profile_banner_url; //Get background image
