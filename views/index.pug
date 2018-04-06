@@ -125,6 +125,7 @@ block content
 										.app--avatar(style='background-image: url('+ user.image +')')
 											img(src='images/m-spore.png')
 										p.app--message--text
+											//- | #{message.text}
 											| #{message.message_create.message_data.text}
 										p.app--message--timestamp 2 hours ago
 								else
@@ -132,5 +133,6 @@ block content
 										.app--avatar(style='background-image: url(images/f-spore.png)')
 											img(src='images/f-spore.png')
 										p.app--message--text
+											//- | #{message.text}
 											| #{message.message_create.message_data.text}
 										p.app--message--timestamp 3 hours ago
